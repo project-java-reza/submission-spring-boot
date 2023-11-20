@@ -18,6 +18,10 @@ public interface BranchService {
 
     BranchResponse getBranchById(String id);
 
+    Branch getById(String id);
+
+    Branch get(String id);
+
     Page<Branch> getAllBranch(Pageable pageable);
 
     BranchResponse update(BranchRequest branchRequest);

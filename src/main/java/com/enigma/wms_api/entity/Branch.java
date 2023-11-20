@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -30,4 +32,7 @@ public class Branch {
 
     @Column(name = "phone_number", unique = true, nullable = false, length = 15)
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "branch")
+    public List<ProductPrice> productPrices;
 }

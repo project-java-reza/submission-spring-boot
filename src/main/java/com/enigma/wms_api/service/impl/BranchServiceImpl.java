@@ -1,12 +1,13 @@
 package com.enigma.wms_api.service.impl;
 
+import com.enigma.wms_api.constant.ResponseMessage;
 import com.enigma.wms_api.entity.Branch;
 import com.enigma.wms_api.exception.BranchNotFoundException;
 import com.enigma.wms_api.model.request.BranchRequest;
 import com.enigma.wms_api.model.response.BranchResponse;
 import com.enigma.wms_api.repository.BranchRepository;
 import com.enigma.wms_api.service.BranchService;
-import com.enigma.wms_api.service.ValidationService;
+import com.enigma.wms_api.util.ValidationUtil;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import lombok.RequiredArgsConstructor;
@@ -29,13 +30,13 @@ public class BranchServiceImpl implements BranchService {
 
     private final BranchRepository branchRepository;
 
-    private final ValidationService validationService;
+    private final ValidationUtil validationUtil;
 
     @Override
     @Transactional(rollbackOn = Exception.class)
     public BranchResponse createBranch(BranchRequest request) {
 
-        validationService.validate(request);
+        validationUtil.validate(request);
 
         if(branchRepository.existsByBranchName(request.getBranchName())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Branch name is already registered");
@@ -85,6 +86,18 @@ public class BranchServiceImpl implements BranchService {
                 .phoneNumber(branch.getPhoneNumber())
                 .build())
                 .orElseThrow();
+    }
+
+    @Override
+    public Branch getById(String id) {
+        return branchRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Branch get(String id) {
+        return branchRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        ResponseMessage.getNotFoundResourceMessage(Branch.class)));
     }
 
     @Override

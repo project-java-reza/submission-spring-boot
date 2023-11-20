@@ -1,0 +1,47 @@
+### Create new branch
+POST http://localhost:8080/api/branch
+Accept: application/json
+Content-Type: application/json
+
+{
+  "branchName" : "Cilandak",
+  "branchCode" : "0205",
+  "address" : "Jl. Cilandak Raya No.XX",
+  "phoneNumber": "08123441234"
+}
+
+### Get All Branch
+GET http://localhost:8080/api/branch
+Accept: application/json
+
+### Get Branch By Id
+GET http://localhost:8080/api/branch/
+Accept: application/json
+
+### Update Branch By Id
+PUT http://localhost:8080/api/branch
+Accept: application/json
+Content-Type: application/json
+
+{
+  "branchId" : "e4219e2f-9f5b-4e07-8e7a-f9fde2c8754f",
+  "branchName" : "Cilandak",
+  "branchCode" : "0203",
+  "address" : "Jl. Cilandak Raya No.XX",
+  "phoneNumber": "081234412342"
+}
+
+### Delete branch
+DELETE http://localhost:8080/api/branch/30b58cd9-a56c-4ee4-8e6c-c35b8311178b
+Content-Type: application/json
+
+### POST http://localhost:8080/api/branch
+Accept: application/json
+Content-Type: application/json
+
+{
+  "branchName" : null,
+  "branchCode" :null,
+  "address" :null,
+  "phoneNumber": null
+}
