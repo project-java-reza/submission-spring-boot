@@ -16,12 +16,22 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ProductRequest {
     private String productId;
+
+    @NotBlank(message = "product code is required")
     private String productCode;
+
+    @NotBlank(message = "product name is required")
     private String productName;
     private Integer minPrice;
     private Integer maxPrice;
+
+    @NotNull(message = "price is required")
+    @Min(value = 0, message = "price must be greater than or equal to 0")
     private BigDecimal price;
+
     private Integer page;
     private Integer size;
+
+    @NotBlank(message = "branch id is required")
     private String branchId;
 }
